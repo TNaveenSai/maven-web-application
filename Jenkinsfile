@@ -1,4 +1,4 @@
-node {
+node('Flipkart-node') {
     def MavenHomeDir = tool name: "maven3.9.2"
     echo "Current Build Number: ${env.BUILD_NUMBER}"
     echo "Current Job Name: ${env.JOB_NAME}"
