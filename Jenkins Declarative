@@ -3,9 +3,9 @@ agent any
 tools {
   maven 'maven3.9.2'
 }
-echo "Current Build Number: ${env.BUILD_NUMBER}"
-    echo "Current Job Name: ${env.JOB_NAME}"
-    echo "Current Node Name: ${env.NODE_NAME}"
+//echo "Current Build Number: ${env.BUILD_NUMBER}"
+  //echo "Current Job Name: ${env.JOB_NAME}"
+   //echo "Current Node Name: ${env.NODE_NAME}"
     //properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5')), pipelineTriggers([pollSCM('* * * * *')])])
        stages{
              stage('CheckoutCode'){
