@@ -18,7 +18,7 @@ node {
     }//NexusClosure
     stage('DeployAppToContainer'){
                                 sshagent(['aceaef46-dcc4-47b6-8c56-1c38eea8ff6c']) {
-                                                                                  sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@http://3.19.202.166:/opt/apache-tomcat-9.0.75/webapps"
+                                                                                  sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.19.202.166:/opt/apache-tomcat-9.0.75/webapps"
                                 }//sshagentclosure
     }//AppDeployColsure
 }//nodeClosure
