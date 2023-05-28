@@ -1,0 +1,35 @@
+pipeline{
+agent any
+tools {
+  maven 'maven3.9.2'
+}
+       stages{
+             stage('CheckoutCode'){
+                  steps{
+                       git branch: 'development', credentialsId: '1759611c-3d4f-45e7-8628-fa588d1e7e2a', url: 'https://github.com/TNaveenSai/maven-web-application.git'
+                  }         
+             }//GitClosure
+             stage('Build'){
+                 steps{
+                      sh "mvn clean package"
+                 }
+             }//BuildClosure
+             stage('SonarQubeReport'){
+                 steps{
+                      sh "mvn sonar:sonar"
+                 }
+             }//SonarQubeClosure
+             stage('ArtifactToNexus'){
+                  steps{
+                      sh "mvn deploy"
+                  }
+             }//NexusClosure
+             stage('AppDeployToContainer'){
+                  steps{
+                       sshagent(['aceaef46-dcc4-47b6-8c56-1c38eea8ff6c']) {
+                                                                                  sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@3.108.220.206:/opt/apache-tomcat-9.0.75/webapps"
+                                }//sshagentclosure
+                  }
+             }//TomcatClosure
+       }//StagesClosure
+}//PipelineClosure
